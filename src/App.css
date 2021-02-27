@@ -2,21 +2,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'PT Sans', sans-serif;
+  font-family: "PT Sans", sans-serif;
 }
 
-.home,
-.services,
-.products,
-.sign-up {
-  display: flex;
-  height: 90vh;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-}
-
- /* .services {
+/* .services {
   background-image: url('https://scx2.b-cdn.net/gfx/news/hires/2018/2-ocean.jpg');
   background-position: center;
   background-size: cover;
