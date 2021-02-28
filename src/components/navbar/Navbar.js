@@ -57,7 +57,7 @@ function Navbar() {
                 className="nav-links"
                 onClick={closeMobileMenu}
               >
-                Products
+                Login
               </Link>
             </li>
 
