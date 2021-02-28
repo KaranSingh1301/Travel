@@ -8,45 +8,54 @@
 .signUp__backgroundImage {
   object-fit: cover;
   width: 100%;
-  height: 92vh;
+  height: 100vh;
   max-height: 100%;
-  z-index: -100;
-  overflow-y: hidden;
 }
+
 .signUp__form {
   position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 100px;
-  z-index: 1;
+  border-radius: 30px;
+  padding: 50px;
+  background-color: rgb(237, 238, 245);
+  opacity: 95%;
+}
+.signUp__title {
+  margin: auto;
+  font-size: 50px;
+  color: blue;
 }
 .signUp__fields {
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
 .signUp__form--inputArea {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  color: white;
+  color: black;
   width: 100%;
+  min-width: 30vw;
 }
 .signUp__label {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  font-size: xx-large;
-  margin: 20px;
+  font-size: x-large;
 }
 .signUp__input {
-  width: 30vw;
+  width: 100%;
   outline: none;
   border: none;
   padding: 10px;
   margin: 10px;
   font-size: 20px;
   background: transparent;
-  border-bottom: 2px solid;
+  border: 1px solid;
+  border-radius: 5px;
 }
 .signUp__button {
   margin: 20px auto;
@@ -69,4 +78,10 @@
   right: 0;
   color: red;
   margin-left: 100px;
+}
+
+@media screen and (max-width: 960px) {
+  .signUp__form {
+    width: 100%;
+  }
 }
