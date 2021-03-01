@@ -17,14 +17,18 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-radius: 30px;
-  padding: 50px;
+  border-radius: 20px;
+  padding: 40px;
+  margin-top: -25px;
   background-color: rgb(237, 238, 245);
 }
 .signUp__title {
-  margin: auto;
-  font-size: 50px;
-  color: blue;
+  font-size: 35px;
+  font-weight: bolder;
+  margin: 2px auto 15px auto;
+  
+  color: rgb(101, 188, 199);
+  
 }
 .signUp__fields {
   position: relative;
@@ -32,6 +36,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  
 }
 .signUp__form--inputArea {
   display: flex;
@@ -40,10 +45,15 @@
   color: black;
   width: 100%;
   min-width: 30vw;
+  
+  
 }
 .signUp__label {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  font-size: x-large;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+      'Lucida Sans', Arial, sans-serif;
+  font-size: 18px;
+  font-weight:600;
+  margin-left: 10px;
 }
 .signUp__input {
   width: 100%;
@@ -55,6 +65,9 @@
   background: transparent;
   border: 1px solid;
   border-radius: 5px;
+  height: 40px;
+  font-size: 15px;
+  font-weight:lighter;
 }
 .signUp__button {
   margin: 20px auto;
@@ -70,7 +83,7 @@
   cursor: pointer;
 }
 .signUp__button:hover {
-  background-color: rgb(81, 212, 146);
+  background-color: rgb(101, 188, 199);;
 }
 .signUp--error {
   position: absolute;

@@ -33,7 +33,7 @@ function Login() {
   });
   return (
     <div className="login">
-      <img className="login__backgroundImage" src="/images/loginBg.jpg" />
+      <img className="login__backgroundImage" src="/images/loginBg.jpg" alt="background"/>
       <form className="login__form" onSubmit={formik.handleSubmit}>
         <div className="login__title">LOGIN</div>
         <div className="login__fields">
