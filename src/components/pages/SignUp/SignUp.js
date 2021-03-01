@@ -1,6 +1,8 @@
 import React from "react";
 import "./SignUp.css";
 import { useFormik } from "formik";
+import {signUpUser} from "../../../action/general-action";
+
 
 function SignUp() {
   const validate = (values) => {
@@ -28,7 +30,7 @@ function SignUp() {
 
     if (!values.confirmPassword) {
       errors.confirmPassword = "Required";
-    } else if (values.password != values.confirmPassword) {
+    } else if (values.password !== values.confirmPassword) {
       errors.confirmPassword = "Passward did not match";
     } else if (values.confirmPassword.length > 20) {
       errors.confirmPassword = "Must be 20 characters or less";
@@ -38,7 +40,7 @@ function SignUp() {
       errors.phone = "Required";
     } else if (!/^[1-9]+[0-9]{9}$/i.test(values.phone)) {
       errors.phone = "Invalid Phone number";
-    } else if (values.phone.length != 10) {
+    } else if (values.phone.length !== 10) {
       errors.phone = "Must be 10 digits";
     }
     return errors;
@@ -55,13 +57,20 @@ function SignUp() {
     validate,
     onSubmit: (values) => {
       console.log(values);
-      alert("form submite successful");
+      
+      signUpUser(values.username,values.email,values.password, values.phone)
+      .then(()=>{
+      console.log("sucesss");
+      })
+      .catch(err => (
+        console.log(err)
+      ));
     },
   });
   // console.log(formik.errors);
   return (
     <div className="signUp">
-      <img className="signUp__backgroundImage" src="/images/signUpBg.jpg" />
+      <img className="signUp__backgroundImage" src="/images/signUpBg.jpg" alt="background"/>
       <form className="signUp__form" onSubmit={formik.handleSubmit}>
         <div className="signUp__title">SIGN UP</div>
         <div className="signUp__fields">
