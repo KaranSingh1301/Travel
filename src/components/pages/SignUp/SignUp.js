@@ -2,10 +2,15 @@ import React from "react";
 import "./SignUp.css";
 import { useFormik } from "formik";
 import {signUpUser} from "../../../action/general-action";
-
+import {useToasts} from 'react-toast-notifications'
+import { useHistory } from "react-router-dom";
 
 function SignUp() {
+   const {addToast}=useToasts();  
+  let history = useHistory();
+
   const validate = (values) => {
+    
     const errors = {};
 
     if (!values.email) {
@@ -47,6 +52,7 @@ function SignUp() {
   };
 
   const formik = useFormik({
+    
     initialValues: {
       email: "",
       username: "",
@@ -56,15 +62,23 @@ function SignUp() {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
-      
-      signUpUser(values.username,values.email,values.password, values.phone)
+      signUpUser(values.username,values.email,values.password, values.phone,)
       .then(()=>{
       console.log("sucesss");
+      addToast("User is successfully resgister",{
+        appearance: "success"
+    })
+    setTimeout(function(){
+      history.push("/login");
+    },3000)
+      
       })
-      .catch(err => (
-        console.log(err)
-      ));
+      .catch(err => {
+        addToast("Something went wrong. Try again",{
+          appearance: "error"
+        })
+        console.log(err);
+    });
     },
   });
   // console.log(formik.errors);

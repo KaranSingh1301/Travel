@@ -1,8 +1,15 @@
 import React from "react";
 import "./Login.css";
 import { useFormik } from "formik";
+import {loginUser} from '../../../action/general-action'
+import {useToasts} from 'react-toast-notifications'
+import { useHistory } from "react-router-dom";
+
 
 function Login() {
+  const {addToast} = useToasts();
+  let history = useHistory();
+
   const validate = (values) => {
     const errors = {};
 
@@ -28,7 +35,24 @@ function Login() {
     validate,
     onSubmit: (values) => {
       console.log(values);
-      alert("form submite successful");
+      loginUser(values.email,values.password)
+      .then(res => {
+        if(res){
+          // console.log(res);
+          addToast(res.message,{
+            appearance:"success"
+          })
+        }
+        setTimeout(function(){
+          history.push("/");
+        },3000)
+      })
+      .catch(err =>{
+        addToast(err.resposne.data.message, {
+          appearance:"error"
+        })
+        console.log(err.response.data.message);
+      })
     },
   });
   return (
