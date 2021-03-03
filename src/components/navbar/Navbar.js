@@ -1,19 +1,26 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
   const [click, setClick] = useState(false);
-  const [button, setButton] = useState(true);
+  // const [button, setButton] = useState(true);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
-  const [authenticated, setAutheenticated] = useState(true);
+  const [authenticated, setAuthenticated] = useState(true);
 
   return (
     <>
       <nav className="navbar">
         <div className="navbar-container">
-          <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+          <Link
+            to="/"
+            className="navbar-logo"
+            onClick={() => {
+              closeMobileMenu();
+              setAuthenticated(!authenticated); // to check auth render
+            }}
+          >
             TRVL
             <i class="fab fa-typo3" />
           </Link>

@@ -22,7 +22,7 @@
 .login__title {
   margin: auto;
   /* font-size: 50px; */
-  color: blue;
+  color: rgb(68, 86, 243);
 }
 .login__fields {
   position: relative;
@@ -62,7 +62,7 @@
   width: 50%;
   height: 40px;
   outline: none;
-  background-color: rgb(68, 86, 243);
+  background-color: #1f98f4;
   border: 2px solid #d9d9d9;
   border-radius: 999px;
   color: white;
