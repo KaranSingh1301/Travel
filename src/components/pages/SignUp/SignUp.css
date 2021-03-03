@@ -23,12 +23,10 @@
   background-color: rgb(237, 238, 245);
 }
 .signUp__title {
-  font-size: 35px;
-  font-weight: bolder;
+  /* font-weight: 900; */
+  font-weight: 900;
   margin: 2px auto 15px auto;
-  
-  color: rgb(101, 188, 199);
-  
+  color: rgb(68, 86, 243);
 }
 .signUp__fields {
   position: relative;
@@ -36,7 +34,6 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  
 }
 .signUp__form--inputArea {
   display: flex;
@@ -45,14 +42,9 @@
   color: black;
   width: 100%;
   min-width: 30vw;
-  
-  
 }
 .signUp__label {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-      'Lucida Sans', Arial, sans-serif;
-  font-size: 18px;
-  font-weight:600;
+  font-weight: 600;
   margin-left: 10px;
 }
 .signUp__input {
@@ -61,29 +53,30 @@
   border: none;
   padding: 10px;
   margin: 10px;
-  font-size: 20px;
+  font-size: 16px;
   background: transparent;
   border: 1px solid;
   border-radius: 5px;
   height: 40px;
-  font-size: 15px;
-  font-weight:lighter;
+  /* font-size: 15px; */
+  font-weight: lighter;
 }
 .signUp__button {
   margin: 20px auto;
   width: 50%;
   height: 40px;
   outline: none;
-  background-color: rgb(68, 86, 243);
-  border: none;
+  background-color: #1f98f4;
+  border: 2px solid #d9d9d9;
   border-radius: 999px;
   color: white;
-  font-size: large;
+  /* font-size: large; */
   transition: all 0.2s ease-out;
   cursor: pointer;
+  font-weight: 900;
 }
 .signUp__button:hover {
-  background-color: rgb(101, 188, 199);;
+  background-color: #1ad376;
 }
 .signUp--error {
   position: absolute;

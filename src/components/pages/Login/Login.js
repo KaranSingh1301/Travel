@@ -22,6 +22,8 @@ function Login() {
     }
     if (!values.password) {
       errors.password = "Required";
+    } else if (values.password.length < 6) {
+      errors.password = "Password must be atleast 6 characters";
     } else if (values.password.length > 20) {
       errors.password = "Must be 20 characters or less";
     }
@@ -38,7 +40,7 @@ function Login() {
       loginUser(values.email,values.password)
       .then(res => {
         if(res){
-          // console.log(res);
+          
           addToast(res.message,{
             appearance:"success"
           })
@@ -48,21 +50,25 @@ function Login() {
         },3000)
       })
       .catch(err =>{
-        addToast(err.resposne.data.message, {
+        addToast(err.response.data.message, {
           appearance:"error"
         })
-        console.log(err.response.data.message);
+       
       })
     },
   });
   return (
     <div className="login">
-      <img className="login__backgroundImage" src="/images/loginBg.jpg" alt="background"/>
+      <img
+        className="login__backgroundImage"
+        src="/images/loginBg.jpg"
+        alt="background"
+      />
       <form className="login__form" onSubmit={formik.handleSubmit}>
-        <div className="login__title">LOGIN</div>
+        <div className="login__title f-head">LOGIN</div>
         <div className="login__fields">
           <div className="login__form--inputArea">
-            <label className="login__label">Email Address</label>
+            <label className="login__label f-text">Email Address</label>
             <input
               className="login__input"
               name="email"
@@ -78,7 +84,7 @@ function Login() {
         </div>
         <div className="login__fields">
           <div className="login__form--inputArea">
-            <label className="login__label">Password</label>
+            <label className="login__label f-text">Password</label>
             <input
               className="login__input"
               name="password"
@@ -92,7 +98,7 @@ function Login() {
             <div className="login--error">{formik.errors.password}</div>
           ) : null}
         </div>
-        <button className="login__button" type="submit">
+        <button className="login__button f-text" type="submit">
           SUBMIT
         </button>
       </form>

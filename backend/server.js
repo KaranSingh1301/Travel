@@ -36,8 +36,6 @@ const db = mysql.createConnection({
 
 //routes  
 app.get('/', (req, res) => res.status(200).send("hello"));
-
-
 app.post('/register', (req, res)=>{
     const newUser = req.body;
     Bcrypt.hash(newUser.password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
@@ -60,22 +58,25 @@ app.post('/register', (req, res)=>{
 
 app.post('/loginuser', (req, res)=>{
   const loginUser = req.body;
-
-  
-  db.query("SELECT * FROM users WHERE email = ?",
+   db.query("SELECT * FROM users WHERE email = ?",
   [loginUser.email],
   (err, user)=>{
     if(err){
-      console.log(err);
-      return res.status(404).send({err:err})
+      
+      return res.status(404).send({message: "Oops! Something went wrong! Try again."})
     }
 
       if(user.length>0){
-        console.log(user);
-        return res
-        .status(200)
-        .send({message: "Login successfull"})
-        
+        Bcrypt.compare(req.body.password, user[0].password, (err, result)=>{
+            if(result===true){
+              return res
+              .status(200)
+              .send({message: "Login successfull"})
+            }else{return res
+              .status(404)
+               .send({message: "password do not match."});
+            }
+        })
       }
       else {
         return res
