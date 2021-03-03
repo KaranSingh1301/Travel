@@ -5,29 +5,49 @@
   font-family: "PT Sans", sans-serif;
 }
 
-/* .services {
-  background-image: url('https://scx2.b-cdn.net/gfx/news/hires/2018/2-ocean.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #fff;
-  font-size: 100px;
-} */
-
-/* .products {
-  background-image: url('images/img-1.jpg');
-  background-position: center;
-  background-size: fill;
-  background-repeat: no-repeat;
-  color: #fff;
-  font-size: 100px;
+/* font sizes */
+.f-head {
+  font-size: 32px;
 }
-
-.sign-up {
-  background-image: url('images/img-8.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #fff;
-  font-size: 100px;
-}   */
+.f-shead {
+  font-size: 26px;
+}
+.f-text {
+  font-size: 18px;
+}
+.f-con {
+  font-size: 15px;
+}
+/* colors */
+/* light */
+.c-blue {
+  color: #7bdff2;
+}
+.c-teal {
+  color: #b2f7ef;
+}
+.c-offWhite {
+  color: #eff7f6;
+}
+.c-cherry {
+  color: #f7d6e0;
+}
+.c-candyPink {
+  color: #f2b5d4;
+}
+/* dark */
+.c-black {
+  color: #353535;
+}
+.c-niceGreen {
+  color: #1ad376;
+}
+.c-white {
+  color: #ffffff;
+}
+.c-gray {
+  color: #d9d9d9;
+}
+.c-navyBlue {
+  color: #284b63;
+}
