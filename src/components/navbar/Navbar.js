@@ -1,13 +1,19 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { TravelContext } from "../../context";
 
 function Navbar() {
   const [click, setClick] = useState(false);
-  // const [button, setButton] = useState(true);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
-  const [authenticated, setAuthenticated] = useState(true);
+  const { TOKEN } = useContext(TravelContext);
+  const [token, setToken] = TOKEN;
+  const handelLogOut = () => {
+    sessionStorage.clear();
+    setToken(null);
+    closeMobileMenu();
+  };
 
   return (
     <>
@@ -18,7 +24,6 @@ function Navbar() {
             className="navbar-logo"
             onClick={() => {
               closeMobileMenu();
-              setAuthenticated(!authenticated); // to check auth render
             }}
           >
             TRVL
@@ -43,18 +48,17 @@ function Navbar() {
                 Services
               </Link>
             </li>
-            {authenticated && (
+            <li className="nav-item">
+              <Link
+                to="/dashboard"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
+                Dashbord
+              </Link>
+            </li>
+            {token && (
               <Fragment>
-                <li className="nav-item">
-                  <Link
-                    to="/dasbord"
-                    className="nav-links"
-                    onClick={closeMobileMenu}
-                  >
-                    Dashbord
-                  </Link>
-                </li>
-
                 <li className="nav-item">
                   <Link
                     to="/profile"
@@ -64,9 +68,14 @@ function Navbar() {
                     Profile
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link to="/" className="nav-links" onClick={handelLogOut}>
+                    LogOut
+                  </Link>
+                </li>
               </Fragment>
             )}
-            {!authenticated && (
+            {!token && (
               <Fragment>
                 <li className="nav-item">
                   <Link

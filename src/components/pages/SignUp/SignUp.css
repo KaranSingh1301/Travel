@@ -20,13 +20,12 @@
   border-radius: 20px;
   padding: 40px;
   margin-top: -25px;
-  background-color: rgb(237, 238, 245);
+  background-color: snow;
 }
 .signUp__title {
-  /* font-weight: 900; */
   font-weight: 900;
   margin: 2px auto 15px auto;
-  color: rgb(68, 86, 243);
+  color: black;
 }
 .signUp__fields {
   position: relative;
@@ -66,10 +65,10 @@
   width: 50%;
   height: 40px;
   outline: none;
-  background-color: #1f98f4;
+  background-color: whitesmoke;
   border: 2px solid #d9d9d9;
   border-radius: 999px;
-  color: white;
+  color: black;
   /* font-size: large; */
   transition: all 0.2s ease-out;
   cursor: pointer;
@@ -77,6 +76,7 @@
 }
 .signUp__button:hover {
   background-color: #1ad376;
+  color: white;
 }
 .signUp--error {
   position: absolute;
