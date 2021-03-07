@@ -2,12 +2,14 @@ import React, { createContext, useState } from "react";
 export const TravelContext = createContext();
 
 export const TravelProvider = (props) => {
+  //fetch auth from session
   const getToken = () => {
     const tokenString = sessionStorage.getItem("token");
     const userToken = JSON.parse(tokenString);
-    console.log(userToken);
     return userToken;
+    // console.log(userToken);
   };
+
   const [user, setUser] = useState();
   const [token, setToken] = useState(getToken);
 
