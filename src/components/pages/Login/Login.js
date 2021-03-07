@@ -43,27 +43,23 @@ function Login() {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
-      sessionStorage.setItem("token", JSON.stringify(values.password));
-      setToken(Auth);
-      Auth && history.push("/dashboard");
-
-      // loginUser(values.email, values.password)
-      //   .then((res) => {
-      //     if (res) {
-      //       addToast(res.message, {
-      //         appearance: "success",
-      //       });
-      //     }
-      //     setTimeout(function () {
-      //       history.push("/");
-      //     }, 3000);
-      //   })
-      //   .catch((err) => {
-      //     addToast(err.response.data.message, {
-      //       appearance: "error",
-      //     });
-      //   });
+      loginUser(values.email, values.password)
+        .then((res) => {
+          if (res) {
+            addToast(res.message, {
+              appearance: "success",
+            });
+            sessionStorage.setItem("token", JSON.stringify(values.email));
+            setToken(Auth);
+            Auth && history.push("/dashboard");
+          }
+          
+        })
+        .catch((err) => {
+          addToast(err.response.data.message, {
+            appearance: "error",
+          });
+        });
     },
   });
   return (

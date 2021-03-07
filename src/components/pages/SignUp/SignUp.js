@@ -1,7 +1,7 @@
 import React from "react";
 import "./SignUp.css";
 import { useFormik } from "formik";
-import { signUpUser } from "../../../action/general-action";
+import { signUpUser ,validateUser } from "../../../action/general-action";
 import { useToasts } from "react-toast-notifications";
 import { useHistory } from "react-router-dom";
 
@@ -60,23 +60,40 @@ function SignUp() {
     },
     validate,
     onSubmit: (values) => {
-      signUpUser(values.username, values.email, values.password, values.phone)
-        .then(() => {
-          console.log("sucesss");
-          addToast("User is successfully resgister", {
-            appearance: "success",
+      validateUser(values.email)
+      .then((res)=>{
+        if(res){
+          
+          signUpUser(values.username, values.email, values.password, values.phone)
+          .then(() => {
+            console.log("sucesss");
+            addToast("User is successfully resgister", {
+              appearance: "success",
+            });
+            setTimeout(function () {
+              history.push("/login");
+            }, 3000);
+          })
+          .catch((err) => {
+            addToast("Something went wrong. Try again", {
+              appearance: "error",
+            });
+            console.log(err);
           });
-          setTimeout(function () {
-            history.push("/login");
-          }, 3000);
-        })
-        .catch((err) => {
-          addToast("Something went wrong. Try again", {
-            appearance: "error",
-          });
-          console.log(err);
-        });
-    },
+        }
+        if(!res){
+          
+            addToast("User already exist", {
+              appearance: "error",
+          
+          })
+        }
+        
+      })
+      
+      
+
+    }
   });
   // console.log(formik.errors);
   return (

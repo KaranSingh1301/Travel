@@ -1,18 +1,65 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Profile.css";
 import axios from "../../../axios";
 import EmailIcon from "@material-ui/icons/Email";
 import PhoneIcon from "@material-ui/icons/Phone";
 import SearchResult from "../../results/SearchResult";
+import {getUser} from "../../../action/general-action"
+import { TravelContext } from "../../../context"
 function Profile() {
   const [bookingResults, setBookingResults] = useState([]);
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const request = await axios.get("/bookings");
-  //     setResults(request.data);
-  //   }
-  //   fetchData();
-  // }, []);
+    //context
+    const { TOKEN, Auth} = useContext(TravelContext);
+    //AUTH
+    const [token] = TOKEN;
+
+    // useEffect(() => {
+     
+    //   async function fetchData() {
+    //     console.log(token);
+    //     const request = await axios.get("http://localhost:8000/getuser", {
+    //       email:token
+    //     });
+    //     console.log(request);
+    //   }
+    //   fetchData();
+    // }, []);
+
+
+// const email = token;
+//   useEffect(() => {
+
+//     getUser(email)
+//     .then(() =>{
+      
+//       console.log(email);
+      
+//     }).catch(err =>{
+      
+//     })
+//     return ;
+//   }, []);
+
+// const getUserData = ()=>{
+  
+// }
+
+// function getUserData(){
+//   console.log("clicked")
+//   // const email = token;
+//   // console.log(email);
+//    let email = Auth();
+//   email =JSON.stringify(email)
+//   console.log(email);
+//   getUser(email)
+//   .then(res=>{
+
+//     console.log(res);
+//   })
+
+// }
+
+
   return (
     <div className="profile">
       <div className="profile_head">
@@ -25,6 +72,11 @@ function Profile() {
           </div>
           <div className="profile__info f-text">
             <PhoneIcon /> <p>9876543210</p>
+          </div>
+          <div>
+            <button>
+              click me
+            </button>
           </div>
         </div>
       </div>
