@@ -5,7 +5,6 @@ export const TravelProvider = (props) => {
   const getToken = () => {
     const tokenString = sessionStorage.getItem("token");
     const userToken = JSON.parse(tokenString);
-    console.log(userToken);
     return userToken;
   };
   const [user, setUser] = useState();
