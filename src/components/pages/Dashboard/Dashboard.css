@@ -1,0 +1,64 @@
+.dashboard__section {
+  display: flex;
+  padding: 30px;
+}
+.dashboard__form {
+  display: flex;
+  justify-content: center;
+}
+.dashboard__formInput {
+  display: flex;
+}
+.dashboard__formInputTop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+.dashboard__formInputBottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dashboard__block {
+  padding: 5px;
+}
+.dashboard__line1 {
+  font-family: "Open Sans", sans-serif;
+  height: 20px;
+}
+.dashboard__line2 {
+  border: 1px solid black;
+  outline: none;
+  padding: 10px;
+}
+.big {
+  width: 15vw;
+  min-width: 100px;
+}
+.small {
+  width: 5vw;
+  min-width: 60px;
+}
+.dashboard__button {
+  width: 5vw;
+  min-width: 80px;
+  color: black;
+  background-color: snow;
+  padding: 10px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+.dashboard__button:hover {
+  color: white;
+  background-color: black;
+}
+.dashboard__formInput--error {
+  color: red;
+}
+@media screen and (max-width: 600px) {
+  .dashboard__formInput {
+    display: block;
+  }
+}

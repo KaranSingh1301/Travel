@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Login.css";
 import { useFormik } from "formik";
-import {loginUser} from '../../../action/general-action'
-import {useToasts} from 'react-toast-notifications'
+import { loginUser } from "../../../action/general-action";
+import { useToasts } from "react-toast-notifications";
 import { useHistory } from "react-router-dom";
-
+import { TravelContext } from "../../../context";
 
 function Login() {
-  const {addToast} = useToasts();
+  //context
+  const { TOKEN, Auth } = useContext(TravelContext);
+  //AUTH
+  const [token, setToken] = TOKEN;
+
+  //backend stuff
+  const { addToast } = useToasts();
   let history = useHistory();
 
+  //compont code
   const validate = (values) => {
     const errors = {};
 
@@ -36,25 +43,23 @@ function Login() {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
-      loginUser(values.email,values.password)
-      .then(res => {
-        if(res){
+      loginUser(values.email, values.password)
+        .then((res) => {
+          if (res) {
+            addToast(res.message, {
+              appearance: "success",
+            });
+            sessionStorage.setItem("token", JSON.stringify(values.email));
+            setToken(Auth);
+            Auth && history.push("/dashboard");
+          }
           
-          addToast(res.message,{
-            appearance:"success"
-          })
-        }
-        setTimeout(function(){
-          history.push("/");
-        },3000)
-      })
-      .catch(err =>{
-        addToast(err.response.data.message, {
-          appearance:"error"
         })
-       
-      })
+        .catch((err) => {
+          addToast(err.response.data.message, {
+            appearance: "error",
+          });
+        });
     },
   });
   return (

@@ -4,8 +4,13 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 require("dotenv").config();
 const Bcrypt = require("bcrypt");
+const {findUserAndSendHelper} = require('./helper/userHelper')
+
+
+
 
 const BCRYPT_SALT_ROUNDS = 12;
+const BCRYPT_SMALL_SALT_ROUND=1;
 
 
 //App Config
@@ -36,10 +41,12 @@ const db = mysql.createConnection({
 
 //routes  
 app.get('/', (req, res) => res.status(200).send("hello"));
+
 app.post('/register', (req, res)=>{
     const newUser = req.body;
     Bcrypt.hash(newUser.password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
-      db.query("INSERT INTO users (name, email, password,phone) VALUES (?,?,?,?)", [newUser.name, newUser.email, hashedPassword, newUser.phone],
+     
+      db.query("INSERT INTO users (user_id, name, email, password,phone) VALUES (?,?,?,?)", [newUser.name, newUser.email, hashedPassword, newUser.phone],
     (err, user)=>{
       if(err){
         console.log(err);
@@ -55,6 +62,20 @@ app.post('/register', (req, res)=>{
     })
 }
 )
+
+app.post('/validate', (req, res)=>{
+  console.log(req.body.email);
+  db.query("SELECT email FROM users WHERE email= ?", req.body.email, 
+
+  (err, user)=>{
+    if(user.length<1){
+      return res.status(200).send(true);
+    }else{
+      return res.status(200).send(false);
+    }
+   
+  })
+})
 
 app.post('/loginuser', (req, res)=>{
   const loginUser = req.body;
@@ -89,6 +110,20 @@ app.post('/loginuser', (req, res)=>{
 
 })
 
+
+app.get(`/getuser` ,(req, res)=>{
+  console.log(req.body.email);
+  db.query("SELECT * FROM users WHERE email= ?", [req.body.email], 
+
+ (err, user)=>{
+    if(user.length>=1){
+      return res.status(200).send(user);
+    }else{
+      return res.status(401).send(false);
+    }
+   
+  })
+})
 
 
 

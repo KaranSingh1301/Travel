@@ -1,16 +1,15 @@
 import React from "react";
 import "./SignUp.css";
 import { useFormik } from "formik";
-import {signUpUser} from "../../../action/general-action";
-import {useToasts} from 'react-toast-notifications'
+import { signUpUser ,validateUser } from "../../../action/general-action";
+import { useToasts } from "react-toast-notifications";
 import { useHistory } from "react-router-dom";
 
 function SignUp() {
-   const {addToast}=useToasts();  
+  const { addToast } = useToasts();
   let history = useHistory();
 
   const validate = (values) => {
-    
     const errors = {};
 
     if (!values.email) {
@@ -52,7 +51,6 @@ function SignUp() {
   };
 
   const formik = useFormik({
-    
     initialValues: {
       email: "",
       username: "",
@@ -62,34 +60,54 @@ function SignUp() {
     },
     validate,
     onSubmit: (values) => {
-      signUpUser(values.username,values.email,values.password, values.phone,)
-      .then(()=>{
-      console.log("sucesss");
-      addToast("User is successfully resgister",{
-        appearance: "success"
-    })
-    setTimeout(function(){
-      history.push("/login");
-    },3000)
-      
+      validateUser(values.email)
+      .then((res)=>{
+        if(res){
+          
+          signUpUser(values.username, values.email, values.password, values.phone)
+          .then(() => {
+            console.log("sucesss");
+            addToast("User is successfully resgister", {
+              appearance: "success",
+            });
+            setTimeout(function () {
+              history.push("/login");
+            }, 3000);
+          })
+          .catch((err) => {
+            addToast("Something went wrong. Try again", {
+              appearance: "error",
+            });
+            console.log(err);
+          });
+        }
+        if(!res){
+          
+            addToast("User already exist", {
+              appearance: "error",
+          
+          })
+        }
+        
       })
-      .catch(err => {
-        addToast("Something went wrong. Try again",{
-          appearance: "error"
-        })
-        console.log(err);
-    });
-    },
+      
+      
+
+    }
   });
   // console.log(formik.errors);
   return (
     <div className="signUp">
-      <img className="signUp__backgroundImage" src="/images/signUpBg.jpg" alt="background"/>
+      <img
+        className="signUp__backgroundImage"
+        src="/images/signUpBg.jpg"
+        alt="background"
+      />
       <form className="signUp__form" onSubmit={formik.handleSubmit}>
-        <div className="signUp__title">SIGN UP</div>
+        <div className="signUp__title f-head">SIGN UP</div>
         <div className="signUp__fields">
           <div className="signUp__form--inputArea">
-            <label className="signUp__label">Email Address</label>
+            <label className="signUp__label f-text">Email Address</label>
             <input
               className="signUp__input"
               name="email"
@@ -100,12 +118,12 @@ function SignUp() {
             />
           </div>
           {formik.touched.email && formik.errors.email ? (
-            <div className="signUp--error">{formik.errors.email}</div>
+            <div className="signUp--error ">{formik.errors.email}</div>
           ) : null}
         </div>
         <div className="signUp__fields">
           <div className="signUp__form--inputArea">
-            <label className="signUp__label">Username</label>
+            <label className="signUp__label f-text">Username</label>
             <input
               className="signUp__input"
               name="username"
@@ -121,7 +139,7 @@ function SignUp() {
         </div>
         <div className="signUp__fields">
           <div className="signUp__form--inputArea">
-            <label className="signUp__label">Password</label>
+            <label className="signUp__label f-text">Password</label>
             <input
               className="signUp__input"
               name="password"
@@ -137,7 +155,7 @@ function SignUp() {
         </div>
         <div className="signUp__fields">
           <div className="signUp__form--inputArea">
-            <label className="signUp__label">Confirm Password</label>
+            <label className="signUp__label f-text">Confirm Password</label>
             <input
               className="signUp__input"
               type="password"
@@ -153,7 +171,7 @@ function SignUp() {
         </div>
         <div className="signUp__fields">
           <div className="signUp__form--inputArea">
-            <label className="signUp__label">Phone </label>
+            <label className="signUp__label f-text">Phone </label>
             <input
               className="signUp__input"
               name="phone"
@@ -167,7 +185,7 @@ function SignUp() {
             <div className="signUp--error">{formik.errors.phone}</div>
           ) : null}
         </div>
-        <button className="signUp__button" type="submit">
+        <button className="signUp__button f-text" type="submit">
           SUBMIT
         </button>
       </form>

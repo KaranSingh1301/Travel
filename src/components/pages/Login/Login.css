@@ -17,12 +17,11 @@
   justify-content: center;
   border-radius: 30px;
   padding: 50px;
-  background-color: rgb(237, 238, 245);
+  background-color: snow;
 }
 .login__title {
   margin: auto;
-  /* font-size: 50px; */
-  color: rgb(68, 86, 243);
+  color: black;
 }
 .login__fields {
   position: relative;
@@ -54,7 +53,6 @@
   border: 1px solid;
   border-radius: 5px;
   height: 40px;
-  /* font-size: 15px; */
   font-weight: lighter;
 }
 .login__button {
@@ -62,10 +60,10 @@
   width: 50%;
   height: 40px;
   outline: none;
-  background-color: #1f98f4;
+  background-color: whitesmoke;
   border: 2px solid #d9d9d9;
   border-radius: 999px;
-  color: white;
+  color: black;
   /* font-size: large; */
   transition: all 0.2s ease-out;
   cursor: pointer;
@@ -73,6 +71,7 @@
 }
 .login__button:hover {
   background-color: #1ad376;
+  color: white;
 }
 .login--error {
   position: absolute;
