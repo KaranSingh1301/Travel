@@ -7,16 +7,15 @@ export const TravelProvider = (props) => {
     const tokenString = sessionStorage.getItem("token");
     const userToken = JSON.parse(tokenString);
     return userToken;
-    // console.log(userToken);
   };
 
-  const [user, setUser] = useState();
+  // const [user, setUser] = useState();
   const [token, setToken] = useState(getToken);
 
   return (
     <TravelContext.Provider
       value={{
-        USER: [user, setUser],
+        // USER: [user, setUser],
         TOKEN: [token, setToken],
         Auth: getToken,
       }}

@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import "./Dashboard.css";
 import SearchResult from "../../results/SearchResult";
 function Dashboard() {
-  const [results, setResults] = useState([{ hi: "hi" }]);
+  const [results, setResults] = useState([]);
   const validate = (values) => {
     const errors = {};
     if (!values.checkIn) {
