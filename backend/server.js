@@ -46,7 +46,7 @@ app.post('/register', (req, res)=>{
     const newUser = req.body;
     Bcrypt.hash(newUser.password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
      
-      db.query("INSERT INTO users (user_id, name, email, password,phone) VALUES (?,?,?,?)", [newUser.name, newUser.email, hashedPassword, newUser.phone],
+      db.query("INSERT INTO users (name, email, password,phone) VALUES (?,?,?,?)", [newUser.name, newUser.email, hashedPassword, newUser.phone],
     (err, user)=>{
       if(err){
         console.log(err);
@@ -123,6 +123,23 @@ app.get(`/getuser` ,(req, res)=>{
     }
    
   })
+})
+
+app.post(`/gethotels`, (req, res)=>{
+  const hotel_location = req.body.location;
+  db.query("SELECT * FROM hotels WHERE location=?", [hotel_location],
+  (err, hotels)=>{
+    if(hotels.length>=1){
+      return res
+      .status(200)
+      .send(hotels)
+    }else{
+      return res
+      .status(404)
+      .send({message: "Oops! Do not find the hotels in this location."});
+    }
+  }
+  )
 })
 
 
