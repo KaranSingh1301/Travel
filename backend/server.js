@@ -111,8 +111,7 @@ app.post('/loginuser', (req, res)=>{
 })
 
 
-app.get(`/getuser` ,(req, res)=>{
-  console.log(req.body.email);
+app.post(`/getuser` ,(req, res)=>{
   db.query("SELECT * FROM users WHERE email= ?", [req.body.email], 
 
  (err, user)=>{
@@ -124,6 +123,8 @@ app.get(`/getuser` ,(req, res)=>{
    
   })
 })
+
+
 
 app.post(`/gethotels`, (req, res)=>{
   const hotel_location = req.body.location;
@@ -141,6 +142,36 @@ app.post(`/gethotels`, (req, res)=>{
   }
   )
 })
+
+app.post(`/bookingdetails`,(req, res)=>{
+  const booking_details = req.body;
+  console.log(booking_details);
+  db.query("INSERT INTO booking(booking_id,hotel_id,user_id,arrival_location,departure_location,arrival_date,departure_date) VALUES (?,?,?,?,?,?,?)",
+  [booking_details.booking_id, 
+  booking_details.hotel_id, 
+  booking_details.user_id, 
+  booking_details.arrival_location, 
+  booking_details.departure_location,
+  booking_details.arrival_date,
+  booking_details.departure_date],
+  (err, result)=>{
+    if(err){
+      console.log(err);
+      return res
+      .status(400)
+      .send(false);
+    }else{
+      return res
+      .status(200)
+      .send(true); 
+      
+    }
+  }
+  )
+})
+
+
+
 
 
 

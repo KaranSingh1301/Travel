@@ -13,9 +13,7 @@ function HeroSection() {
       <p>What are you waiting for?</p>
       <div className="hero-button">
         <Link to={token ? "/dashBoard" : "/sign-up"}>
-          <Button className="hero-button__1" variant="outlined">
-            get started
-          </Button>
+          <button className="hero-button__1">EXPLORE</button>
         </Link>
       </div>
     </div>
