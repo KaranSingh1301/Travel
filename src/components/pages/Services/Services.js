@@ -15,13 +15,13 @@ function Services() {
               src="images/hotel.jpg"
               text="Explore some of the best options of a stay"
               label="Hotels"
-              path="/services"
+              path="/dashboard"
             />
             <CardItem
               src="images/meal.jpg"
               text="Food that is die for"
               label="Meals"
-              path="/services"
+              path="/dashboard"
             />
           </ul>
           <ul className="services__items">
@@ -29,19 +29,19 @@ function Services() {
               src="images/flight.jpg"
               text="FLy to your Dream Destination in style"
               label="Flights"
-              path="/services"
+              path="/dashboard"
             />
             <CardItem
               src="images/train.jpg"
               text="Experience the area with a tour in train"
               label="Trains"
-              path="/services"
+              path="/dashboard"
             />
             <CardItem
               src="images/bus.jpg"
               text="Unlock the joy with the best buses to for travel"
               label="Bus"
-              path="/services"
+              path="/dashboard"
             />
           </ul>
         </div>
