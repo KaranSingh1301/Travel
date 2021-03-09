@@ -49,9 +49,12 @@ function Login() {
             addToast(res.message, {
               appearance: "success",
             });
+            setTimeout(() => {
             sessionStorage.setItem("token", JSON.stringify(values.email));
             setToken(Auth);
             Auth && history.push("/dashboard");
+            }, 1500);
+            
           }
           
         })

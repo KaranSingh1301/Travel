@@ -4,7 +4,7 @@ import "./Profile.css";
 import EmailIcon from "@material-ui/icons/Email";
 import PhoneIcon from "@material-ui/icons/Phone";
 import SearchResult from "../../results/SearchResult";
-import { getUser } from "../../../action/general-action";
+import { getUser} from "../../../action/general-action";
 import { TravelContext } from "../../../context";
 function Profile() {
   const [bookingResults, setBookingResults] = useState([]);
@@ -21,7 +21,7 @@ function Profile() {
           // console.log(res[0].email);
           setUser(res[0]);
         } else {
-          console.log("this is getuser error grom profile");
+          console.log("this is getuser error from profile");
         }
       });
     }

@@ -17,12 +17,12 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
+        <ToastProvider  autoDismiss placement="top-right">
           <Route path="/services" component={Services} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/profile" component={Profile} />
           <Route path="/" exact component={Home} />
-          <ToastProvider>
-            <Route path="/sign-up" component={SignUp} />
+          <Route path="/sign-up" component={SignUp} />
             <Route path="/login" component={Login} />
           </ToastProvider>
         </Switch>

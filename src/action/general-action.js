@@ -31,6 +31,15 @@ export const validateUser = async (email) => {
     .catch((err) => Promise.reject(err));
 };
 
+  export const getHotels = async (location) =>{
+      return await axios
+      .post(`http://localhost:8000/gethotels`, {
+          location:location
+      })
+      .then(res => res.data)
+      .catch(err => Promise.reject(err));
+  }
+  
 export const getUser = async (email) => {
   return await axios
     .post(`http://localhost:8000/getuser`, {

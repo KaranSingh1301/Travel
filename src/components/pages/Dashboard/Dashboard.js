@@ -4,8 +4,12 @@ import DashboardCard from "./DashboardCard";
 import { useFormik } from "formik";
 import "./Dashboard.css";
 import SearchResult from "../../results/SearchResult";
+import {getHotels} from "../../../action/general-action";
+import {useToasts} from "react-toast-notifications"
+
 function Dashboard() {
   const [results, setResults] = useState([]);
+  const { addToast } = useToasts();
   const validate = (values) => {
     const errors = {};
     if (!values.checkIn) {
@@ -33,6 +37,25 @@ function Dashboard() {
     validate,
     onSubmit: (values) => {
       console.log(values);
+      getHotels(values.location)
+      .then(res=>{
+        if(res){
+          addToast("Hotels previewed are shown below!",
+          {appearance: "success"}
+          )
+          setResults([""])
+          res.map(hotels=>{
+            console.log(hotels);
+          })
+
+        }
+       
+      })
+      .catch(err=>{
+        addToast(err.response.data.message,{
+          appearance:"warning"
+        })
+      })
     },
   });
 
