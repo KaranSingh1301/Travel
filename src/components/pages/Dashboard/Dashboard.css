@@ -61,4 +61,7 @@
   .dashboard__formInput {
     display: block;
   }
+  .dashboard__section {
+    flex-direction: column;
+  }
 }

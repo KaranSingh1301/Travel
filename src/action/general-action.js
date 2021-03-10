@@ -31,19 +31,32 @@ export const validateUser = async (email) => {
     .catch((err) => Promise.reject(err));
 };
 
-  export const getHotels = async (location) =>{
-      return await axios
-      .post(`http://localhost:8000/gethotels`, {
-          location:location
-      })
-      .then(res => res.data)
-      .catch(err => Promise.reject(err));
-  }
-  
+export const getHotels = async (location) => {
+  return await axios
+    .post(`http://localhost:8000/gethotels`, {
+      location: location,
+    })
+    .then((res) => res.data)
+    .catch((err) => Promise.reject(err));
+};
+
 export const getUser = async (email) => {
   return await axios
     .post(`http://localhost:8000/getuser`, {
       email: email,
+    })
+    .then((res) => res.data)
+    .catch((err) => Promise.reject(err));
+};
+export const postBooking = async (booking) => {
+  return await axios
+    .post(`http://localhost:8000/booking`, {
+      hotel_id: booking.hotel_id,
+      user_id: booking.user_id,
+      arrival_location: booking.arrival_location,
+      departure_location: booking.departure_location,
+      arrival_date: booking.arival_date,
+      departure_date: booking.departure_date,
     })
     .then((res) => res.data)
     .catch((err) => Promise.reject(err));

@@ -1,24 +1,21 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Profile.css";
-// import axios from "../../../axios";
 import EmailIcon from "@material-ui/icons/Email";
 import PhoneIcon from "@material-ui/icons/Phone";
 import SearchResult from "../../results/SearchResult";
-import { getUser} from "../../../action/general-action";
+import { getUser } from "../../../action/general-action";
 import { TravelContext } from "../../../context";
 function Profile() {
   const [bookingResults, setBookingResults] = useState([]);
   //context
-  const { TOKEN } = useContext(TravelContext);
-  const [token, setToken] = TOKEN;
-  //USER
-  const [user, setUser] = useState([]);
+  const { USER, TOKEN } = useContext(TravelContext);
+  const [token] = TOKEN;
+  const [user, setUser] = USER;
 
   useEffect(() => {
     async function fetchData() {
       getUser(token).then((res) => {
         if (res) {
-          // console.log(res[0].email);
           setUser(res[0]);
         } else {
           console.log("this is getuser error from profile");
@@ -26,7 +23,7 @@ function Profile() {
       });
     }
     fetchData();
-  }, []);
+  }, [token]);
 
   return (
     <div className="profile">
