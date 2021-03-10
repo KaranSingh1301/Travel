@@ -4,8 +4,8 @@ import DashboardCard from "./DashboardCard";
 import { useFormik } from "formik";
 import "./Dashboard.css";
 import SearchResult from "../../results/SearchResult";
-import {getHotels} from "../../../action/general-action";
-import {useToasts} from "react-toast-notifications"
+import { getHotels } from "../../../action/general-action";
+import { useToasts } from "react-toast-notifications";
 
 function Dashboard() {
   const [results, setResults] = useState([]);
@@ -36,26 +36,20 @@ function Dashboard() {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
       getHotels(values.location)
-      .then(res=>{
-        if(res){
-          addToast("Hotels previewed are shown below!",
-          {appearance: "success"}
-          )
-          setResults([""])
-          res.map(hotels=>{
-            console.log(hotels);
-          })
-
-        }
-       
-      })
-      .catch(err=>{
-        addToast(err.response.data.message,{
-          appearance:"warning"
+        .then((res) => {
+          if (res) {
+            addToast("Hotels previewed are shown below!", {
+              appearance: "success",
+            });
+            setResults(res);
+          }
         })
-      })
+        .catch((err) => {
+          addToast(err.response.data.message, {
+            appearance: "warning",
+          });
+        });
     },
   });
 
@@ -134,8 +128,8 @@ function Dashboard() {
                 className="dashboard__line2 small"
                 type="number"
                 min={0}
-                placeholder="0"
-                name="nameOfKids"
+                placeholder={0}
+                name="numberOfKids"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.numberOfKids}
@@ -194,19 +188,19 @@ function Dashboard() {
       )}
       {results.length > 0 && (
         <Fragment>
-          <SearchResult
-            img="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU"
-            location="New Delhi"
-            title="Stay at this spacious Edwardian House"
-            description="1 guest · 1 bedroom · 1 bed · 1.5 shared bthrooms · Wifi · Kitchen · Free parking · Washing Machine"
-            from="06-03-2021"
-            to="12-03-2021"
-            star={4.73}
-            price="30 "
-            total="117 "
-          />
           {results.map((result) => (
-            <SearchResult />
+            <SearchResult
+              key={result.hotel_id}
+              img="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU"
+              hotelID={result.hotel_id}
+              location={result.location}
+              title={result.hotel_name}
+              description={result.ameneties}
+              from={formik.values.checkIn}
+              to={formik.values.checkOut}
+              star={result.rating}
+              price={result.price}
+            />
           ))}
         </Fragment>
       )}

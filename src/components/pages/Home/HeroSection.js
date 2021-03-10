@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import "./HeroSection.css";
-import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { TravelContext } from "../../../context";
 
 function HeroSection() {
   const { TOKEN } = useContext(TravelContext);
-  const [token, setToken] = TOKEN;
+  const [token] = TOKEN;
   return (
     <div className="hero-container">
       <h1>ADVENTURE AWAITS</h1>
