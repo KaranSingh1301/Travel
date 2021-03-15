@@ -136,7 +136,7 @@ app.post(`/gethotels`, (req, res) => {
 
 app.post("/booking", (req, res) => {
   db.query(
-    "INSERT INTO booking (hotel_id, user_id,arrival_location,departure_location,arrival_date,departure_date) VALUES (?,?,?,?,?,?)",
+    "INSERT INTO booking (hotel_id,user_id,arrival_location,departure_location,arrival_date,departure_date) VALUES (?,?,?,?,?,?)",
     [
       req.body.hotel_id,
       req.body.user_id,
@@ -145,7 +145,38 @@ app.post("/booking", (req, res) => {
       req.body.arrival_date,
       req.body.departure_date,
     ],
-    (err, user) => {
+    (err, booking) => {
+      if (err) {
+        console.log(err);
+        return res.status(400);
+      } else {
+        return res.status(200).send(true);
+      }
+    }
+  );
+});
+
+app.post(`/getBookings`, (req, res) => {
+  const user_id = req.body.user_id;
+  db.query(
+    "select * from booking join hotels on booking.hotel_id=hotels.hotel_id where user_id=?",
+    [user_id],
+    (err, bookings) => {
+      if (bookings.length >= 1) {
+        return res.status(200).send(bookings);
+      } else {
+        return res.status(404).send({
+          message: "Oops! it looks like you havent made any bookings.",
+        });
+      }
+    }
+  );
+});
+app.post("/deleteBooking", (req, res) => {
+  db.query(
+    "delete from booking where booking_id=?",
+    [req.body.booking_id],
+    (err, booking) => {
       if (err) {
         console.log(err);
         return res.status(400);

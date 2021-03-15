@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { getBookings } from "./action/general-action";
 export const TravelContext = createContext();
 
 export const TravelProvider = (props) => {
@@ -11,11 +12,25 @@ export const TravelProvider = (props) => {
 
   const [user, setUser] = useState([]);
   const [token, setToken] = useState(getToken);
+  const [bookingResults, setBookingResults] = useState([]);
+
+  async function fetchBookings() {
+    getBookings(user.user_id).then((res) => {
+      if (res) {
+        setBookingResults(res);
+      } else {
+        console.log("this is getBookings error from profile");
+      }
+    });
+  }
+
   return (
     <TravelContext.Provider
       value={{
         USER: [user, setUser],
         TOKEN: [token, setToken],
+        BOOKINGS: [bookingResults, setBookingResults],
+        FETCH_BOOKINGS: fetchBookings,
         Auth: getToken,
       }}
     >
