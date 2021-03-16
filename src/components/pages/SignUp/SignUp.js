@@ -69,7 +69,7 @@ function SignUp() {
             values.phone
           )
             .then(() => {
-              console.log("sucesss");
+              // console.log("sucesss");
               addToast("User is successfully resgister", {
                 appearance: "success",
               });
@@ -112,6 +112,7 @@ function SignUp() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
+              autoFocus
             />
           </div>
           {formik.touched.email && formik.errors.email ? (

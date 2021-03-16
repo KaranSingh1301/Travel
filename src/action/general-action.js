@@ -61,3 +61,19 @@ export const postBooking = async (booking) => {
     .then((res) => res.data)
     .catch((err) => Promise.reject(err));
 };
+export const getBookings = async (user_id) => {
+  return await axios
+    .post(`http://localhost:8000/getBookings`, {
+      user_id: user_id,
+    })
+    .then((res) => res.data)
+    .catch((err) => Promise.reject(err));
+};
+export const deleteBooking = async (booking_id) => {
+  return await axios
+    .post(`http://localhost:8000/deleteBooking`, {
+      booking_id: booking_id,
+    })
+    .then((res) => res.data)
+    .catch((err) => Promise.reject(err));
+};

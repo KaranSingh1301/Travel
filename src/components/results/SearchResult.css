@@ -5,6 +5,7 @@
   padding: 20px;
   border-bottom: 1px solid lightgray;
   cursor: pointer;
+  /* width: 100%; */
 }
 
 .searchResult:hover {
@@ -74,6 +75,12 @@
 @media screen and (max-width: 600px) {
   .searchResult__infoBottom {
     display: block;
+  }
+}
+@media screen and (max-width: 800px) {
+  .searchResult > img {
+    height: 150;
+    width: 180px;
   }
 }
 @media screen and (min-width: 600px) {

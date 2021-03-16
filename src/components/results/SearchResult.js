@@ -1,14 +1,20 @@
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import "./SearchResult.css";
 import { TravelContext } from "../../context";
-import { postBooking, getUser } from "../../action/general-action";
+import {
+  postBooking,
+  getUser,
+  deleteBooking,
+} from "../../action/general-action";
 import { useHistory } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 import StarIcon from "@material-ui/icons/Star";
 
 function SearchResult({
   img,
   hotelID,
   location,
+  booking_id,
   title,
   description,
   from,
@@ -16,9 +22,11 @@ function SearchResult({
   star,
   price,
 }) {
-  const { USER, TOKEN } = useContext(TravelContext);
+  const { USER, TOKEN, FETCH_BOOKINGS } = useContext(TravelContext);
   const [user, setUser] = USER;
   const [token] = TOKEN;
+  const { addToast } = useToasts();
+
   let history = useHistory();
   async function fetchData() {
     getUser(token).then((res) => {
@@ -43,36 +51,82 @@ function SearchResult({
         departure_location: location,
         arival_date: from,
         departure_date: to,
-      });
+      })
+        .then(() => {
+          // console.log("sucesss booking");
+          addToast("Your Booking is made", {
+            appearance: "success",
+          });
+        })
+        .catch((err) => {
+          addToast("Something went wrong while booking. Try again", {
+            appearance: "error",
+          });
+          console.log(err);
+        });
+    }
+  };
+  const handleDelete = () => {
+    if (!token) {
+      history.push("./login");
+    }
+    if (token) {
+      deleteBooking(booking_id)
+        .then(() => {
+          // console.log("removal of booking");
+          addToast("Your Booking is canceled", {
+            appearance: "success",
+          });
+        })
+        .catch((err) => {
+          addToast("Something went wrong while removing booking. Try again", {
+            appearance: "error",
+          });
+          console.log(err);
+        });
+      FETCH_BOOKINGS();
     }
   };
 
   return (
     <div className="searchResult">
       <img src={img} alt="" />
-      <button className="searchResult__button f-con" onClick={handleBooking}>
-        Book
-      </button>
+      {booking_id && (
+        <button className="searchResult__button f-con" onClick={handleDelete}>
+          Delete
+        </button>
+      )}
+      {!booking_id && (
+        <button className="searchResult__button f-con" onClick={handleBooking}>
+          Book
+        </button>
+      )}
 
       <div className="searchResult__info">
         <div className="searchResult__infoTop">
-          <p>{location}</p>
-          <h3>{title}</h3>
-          <p>{hotelID}</p>
-          <p>{description}</p>
+          {location && <p>{location}</p>}
+          {title && <h3>{title}</h3>}
+          <p>{"____"}</p>
+          {description && <p>{description}</p>}
           {from && <p>FROM: {from}</p>}
           {to && <p>TO: {to}</p>}
         </div>
 
         <div className="searchResult__infoBottom">
           <div className="searchResult__stars">
-            <StarIcon className="searchResult__star" />
-            <p>
-              <strong>{star}</strong>
-            </p>
+            {star && (
+              <Fragment>
+                {" "}
+                <StarIcon className="searchResult__star" />
+                <p>
+                  {" "}
+                  <strong>{star}</strong>
+                </p>
+              </Fragment>
+            )}
           </div>
           <div className="searchResults__price">
-            <p>Rs {price}/Night</p>
+            {price && <p>Rs {price}/Night</p>}
           </div>
         </div>
       </div>

@@ -82,6 +82,7 @@ function Login() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
+              autoFocus
             />
           </div>
           {formik.touched.email && formik.errors.email ? (
