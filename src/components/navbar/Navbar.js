@@ -70,7 +70,7 @@ function Navbar() {
                 </li>
                 <li className="nav-item">
                   <Link to="/" className="nav-links" onClick={handelLogOut}>
-                    LogOut
+                    Logout
                   </Link>
                 </li>
               </Fragment>

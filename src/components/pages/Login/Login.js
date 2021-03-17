@@ -50,13 +50,11 @@ function Login() {
               appearance: "success",
             });
             setTimeout(() => {
-            sessionStorage.setItem("token", JSON.stringify(values.email));
-            setToken(Auth);
-            Auth && history.push("/dashboard");
+              sessionStorage.setItem("token", JSON.stringify(values.email));
+              setToken(Auth);
+              Auth && history.push("/dashboard");
             }, 1500);
-            
           }
-          
         })
         .catch((err) => {
           addToast(err.response.data.message, {
@@ -84,6 +82,7 @@ function Login() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
+              autoFocus
             />
           </div>
           {formik.touched.email && formik.errors.email ? (

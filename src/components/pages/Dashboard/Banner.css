@@ -43,4 +43,14 @@
   .banner__search {
     display: none;
   }
+  .banner__info {
+    width: 200px;
+  }
+  .banner__info > h5 {
+    margin-top: 5px;
+    font-size: 10px;
+  }
+  .banner__info > h1 {
+    font-size: 25px;
+  }
 }

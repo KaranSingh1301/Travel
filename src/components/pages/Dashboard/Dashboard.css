@@ -57,8 +57,11 @@
 .dashboard__formInput--error {
   color: red;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .dashboard__formInput {
     display: block;
+  }
+  .dashboard__section {
+    flex-direction: column;
   }
 }
