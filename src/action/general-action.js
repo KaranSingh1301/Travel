@@ -1,8 +1,9 @@
 import axios from "axios";
 
+
 export const signUpUser = async (name, email, password, phone) => {
   return await axios
-    .post(`http://localhost:8000/register`, {
+    .post(`../../backend/register`, {
       name: name,
       email: email,
       password: password,
@@ -14,7 +15,7 @@ export const signUpUser = async (name, email, password, phone) => {
 
 export const loginUser = async (email, password) => {
   return await axios
-    .post(`http://localhost:8000/loginuser`, {
+    .post(`../../backend/loginuser`, {
       email: email,
       password: password,
     })
@@ -24,7 +25,7 @@ export const loginUser = async (email, password) => {
 
 export const validateUser = async (email) => {
   return await axios
-    .post(`http://localhost:8000/validate`, {
+    .post(`../../backend/validate`, {
       email: email,
     })
     .then((res) => res.data)
@@ -33,7 +34,7 @@ export const validateUser = async (email) => {
 
 export const getHotels = async (location) => {
   return await axios
-    .post(`http://localhost:8000/gethotels`, {
+    .post(`../../backend/gethotels`, {
       location: location,
     })
     .then((res) => res.data)
@@ -42,15 +43,17 @@ export const getHotels = async (location) => {
 
 export const getUser = async (email) => {
   return await axios
-    .post(`http://localhost:8000/getuser`, {
+    .post(`../../backend/getuser`, {
       email: email,
     })
     .then((res) => res.data)
     .catch((err) => Promise.reject(err));
 };
+
+
 export const postBooking = async (booking) => {
   return await axios
-    .post(`http://localhost:8000/booking`, {
+    .post(`../../backend/bookingdetails`, {
       hotel_id: booking.hotel_id,
       user_id: booking.user_id,
       arrival_location: booking.arrival_location,
@@ -61,18 +64,23 @@ export const postBooking = async (booking) => {
     .then((res) => res.data)
     .catch((err) => Promise.reject(err));
 };
+
+
 export const getBookings = async (user_id) => {
   return await axios
-    .post(`http://localhost:8000/getBookings`, {
+    .post(`../../backend/getBookings`, {
       user_id: user_id,
     })
     .then((res) => res.data)
     .catch((err) => Promise.reject(err));
 };
-export const deleteBooking = async (booking_id) => {
+
+
+export const deleteBooking = async (hotel_id,user_id) => {
   return await axios
-    .post(`http://localhost:8000/deleteBooking`, {
-      booking_id: booking_id,
+    .post(`../../backend/deleteBooking`, {
+      hotel_id:hotel_id,
+      user_id:user_id
     })
     .then((res) => res.data)
     .catch((err) => Promise.reject(err));

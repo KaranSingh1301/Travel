@@ -15,8 +15,9 @@ export const TravelProvider = (props) => {
   const [bookingResults, setBookingResults] = useState([]);
 
   async function fetchBookings() {
-    getBookings(user.user_id).then((res) => {
+    getBookings(user.id).then((res) => {
       if (res) {
+        console.log(res);
         setBookingResults(res);
       } else {
         console.log("this is getBookings error from profile");

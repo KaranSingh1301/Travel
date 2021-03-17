@@ -32,6 +32,8 @@ function SearchResult({
     getUser(token).then((res) => {
       if (res) {
         setUser(res[0]);
+        
+
       } else {
         console.log("this is getuser error from results");
       }
@@ -46,7 +48,7 @@ function SearchResult({
       fetchData();
       postBooking({
         hotel_id: hotelID,
-        user_id: user.user_id,
+        user_id: user.id,
         arrival_location: location,
         departure_location: location,
         arival_date: from,
@@ -71,7 +73,11 @@ function SearchResult({
       history.push("./login");
     }
     if (token) {
-      deleteBooking(booking_id)
+      console.log(booking_id);
+      deleteBooking(
+      hotelID,
+      user.id
+      )
         .then(() => {
           // console.log("removal of booking");
           addToast("Your Booking is canceled", {

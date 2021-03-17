@@ -40,6 +40,13 @@
   cursor: pointer;
 }
 
+.hero-button__1:hover {
+  transition: all 0.3s ease-out;
+  background: #fff;
+  color: #242424;
+  transition: 250ms;
+}
+
 .fa-play-circle {
   margin-left: 4px;
 }

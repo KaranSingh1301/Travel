@@ -190,11 +190,11 @@ function Dashboard() {
         <Fragment>
           {results.map((result) => (
             <SearchResult
-              key={result.hotel_id}
+              key={result.id}
               img="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU"
-              hotelID={result.hotel_id}
+              hotelID={result.id}
               location={result.location}
-              title={result.hotel_name}
+              title={result.name}
               description={result.ameneties}
               from={formik.values.checkIn}
               to={formik.values.checkOut}

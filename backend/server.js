@@ -22,68 +22,63 @@ app.use(cors());
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "password",
+  password: "Karan@130101",
   database: "traveldb",
   multipleStatements: true,
 });
 
-db.connect(function (err) {
-  if (err) {
-    console.log(err);
-    console.log("this is a error");
-  } else {
-    console.log("DB Connected!");
-  }
+db.connect(function(err) {
+  if (err) throw err;
+  console.log("DB Connected!");
 });
 
-//routes
-app.get("/", (req, res) => res.status(200).send("hello"));
 
-app.post("/register", (req, res) => {
-  const newUser = req.body;
-  Bcrypt.hash(newUser.password, BCRYPT_SALT_ROUNDS).then((hashedPassword) => {
-    db.query(
-      "INSERT INTO users (name, email, password,phone) VALUES (?,?,?,?)",
-      [newUser.name, newUser.email, hashedPassword, newUser.phone],
-      (err, user) => {
-        if (err) {
-          console.log(err);
-          return res.status(400);
-        } else {
-          return res.status(200).send(true);
-        }
+
+
+//routes  
+app.get('/', (req, res) => res.status(200).send("hello"));
+
+app.post('/register', (req, res)=>{
+    const newUser = req.body;
+    Bcrypt.hash(newUser.password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
+     
+      db.query("INSERT INTO travel_users (name, email, password,phone) VALUES (?,?,?,?)", [newUser.name, newUser.email, hashedPassword, newUser.phone],
+    (err, user)=>{
+      if(err){
+        console.log(err);
+        return res.status(400);
+      }else{
+        return res
+        .status(200)
+        .send(true); 
+      }
       }
     );
   });
 });
 
-app.post("/validate", (req, res) => {
-  console.log(req.body.email);
-  db.query(
-    "SELECT email FROM users WHERE email= ?",
-    req.body.email,
+app.post('/validate', (req, res)=>{
+  db.query("SELECT email FROM travel_users WHERE email= ?", req.body.email, 
 
-    (err, user) => {
-      if (user.length < 1) {
-        return res.status(200).send(true);
-      } else {
-        return res.status(200).send(false);
-      }
+  (err, user)=>{
+    if(user.length<1){
+      return res.status(200).send(true);
+    }else{
+      return res.status(200).send(false);
     }
+  }
   );
 });
 
 app.post("/loginuser", (req, res) => {
   const loginUser = req.body;
-  db.query(
-    "SELECT * FROM users WHERE email = ?",
-    [loginUser.email],
-    (err, user) => {
-      if (err) {
-        return res
-          .status(404)
-          .send({ message: "Oops! Something went wrong! Try again." });
-      }
+   db.query("SELECT * FROM travel_users WHERE email = ?",
+  [loginUser.email],
+  (err, user)=>{
+    if(err){
+      
+      return res.status(404).send({message: "Oops! Something went wrong! Try again."})
+    }
 
       if (user.length > 0) {
         Bcrypt.compare(req.body.password, user[0].password, (err, result) => {
@@ -104,7 +99,7 @@ app.post("/loginuser", (req, res) => {
 
 app.post(`/getuser`, (req, res) => {
   db.query(
-    "SELECT * FROM users WHERE email= ?",
+    "SELECT * FROM travel_users WHERE email= ?",
     [req.body.email],
 
     (err, user) => {
@@ -123,7 +118,7 @@ app.post(`/gethotels`, (req, res) => {
     "SELECT * FROM hotels WHERE location=?",
     [hotel_location],
     (err, hotels) => {
-      if (hotels.length >= 1) {
+      if (hotels.length) {
         return res.status(200).send(hotels);
       } else {
         return res
@@ -131,27 +126,31 @@ app.post(`/gethotels`, (req, res) => {
           .send({ message: "Oops! Do not find the hotels in this location." });
       }
     }
-  );
-});
+  
+  )
+})
 
-app.post("/booking", (req, res) => {
-  db.query(
-    "INSERT INTO booking (hotel_id,user_id,arrival_location,departure_location,arrival_date,departure_date) VALUES (?,?,?,?,?,?)",
-    [
-      req.body.hotel_id,
-      req.body.user_id,
-      req.body.arrival_location,
-      req.body.departure_location,
-      req.body.arrival_date,
-      req.body.departure_date,
-    ],
-    (err, booking) => {
-      if (err) {
-        console.log(err);
-        return res.status(400);
-      } else {
-        return res.status(200).send(true);
-      }
+app.post(`/bookingdetails`,(req, res)=>{
+  const booking_details = req.body;
+  db.query("INSERT INTO bookings(hotel_id,user_id,arrival_location,departure_location,arrival_date,departure_date) VALUES (?,?,?,?,?,?)",
+  [
+  booking_details.hotel_id, 
+  booking_details.user_id, 
+  booking_details.arrival_location, 
+  booking_details.departure_location,
+  booking_details.arrival_date,
+  booking_details.departure_date],
+  (err, result)=>{
+    if(err){
+      console.log(err);
+      return res
+      .status(400)
+      .send(false);
+    }else{
+      return res
+      .status(200)
+      .send(true); 
+    }
     }
   );
 });
@@ -159,7 +158,7 @@ app.post("/booking", (req, res) => {
 app.post(`/getBookings`, (req, res) => {
   const user_id = req.body.user_id;
   db.query(
-    "select * from booking join hotels on booking.hotel_id=hotels.hotel_id where user_id=?",
+    "select * from bookings join hotels on bookings.hotel_id=hotels.id where user_id=?",
     [user_id],
     (err, bookings) => {
       if (bookings.length >= 1) {
@@ -174,8 +173,8 @@ app.post(`/getBookings`, (req, res) => {
 });
 app.post("/deleteBooking", (req, res) => {
   db.query(
-    "delete from booking where booking_id=?",
-    [req.body.booking_id],
+    "delete from bookings where hotel_id=? AND user_id=?",
+    [req.body.hotel_id, req.body.user_id],
     (err, booking) => {
       if (err) {
         console.log(err);

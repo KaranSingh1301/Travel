@@ -23,6 +23,7 @@ function Profile() {
       });
     }
     fetchData();
+    // console.log(bookingResults);
     FETCH_BOOKINGS();
   }, []);
   return (
@@ -48,12 +49,12 @@ function Profile() {
               <Fragment>
                 {bookingResults.map((result) => (
                   <SearchResult
-                    key={result.booking_id}
+                    key={result.id}
                     img="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU"
                     hotelID={result.hotel_id}
                     location={result.arrival_location}
-                    booking_id={result.booking_id}
-                    title={result.hotel_name}
+                    booking_id={result.id}
+                    title={result.name}
                     description={result.ameneties}
                     from={result.arrival_date}
                     to={result.departure_date}
