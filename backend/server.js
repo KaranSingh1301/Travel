@@ -172,7 +172,6 @@ app.post(`/getBookings`, (req, res) => {
   );
 });
 app.post("/deleteBooking", (req, res) => {
-  console.log(req.body);
   db.query(
     "delete from bookings where hotel_id=? AND user_id=?",
     [req.body.hotel_id, req.body.user_id],
