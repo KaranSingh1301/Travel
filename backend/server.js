@@ -46,7 +46,7 @@ app.post('/register', (req, res)=>{
     const newUser = req.body;
     Bcrypt.hash(newUser.password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
      
-      db.query("INSERT INTO users (name, email, password,phone) VALUES (?,?,?,?)", [newUser.name, newUser.email, hashedPassword, newUser.phone],
+      db.query("INSERT INTO travel_users (name, email, password,phone) VALUES (?,?,?,?)", [newUser.name, newUser.email, hashedPassword, newUser.phone],
     (err, user)=>{
       if(err){
         console.log(err);
@@ -64,8 +64,7 @@ app.post('/register', (req, res)=>{
 )
 
 app.post('/validate', (req, res)=>{
-  console.log(req.body.email);
-  db.query("SELECT email FROM users WHERE email= ?", req.body.email, 
+  db.query("SELECT email FROM travel_users WHERE email= ?", req.body.email, 
 
   (err, user)=>{
     if(user.length<1){
@@ -79,7 +78,7 @@ app.post('/validate', (req, res)=>{
 
 app.post('/loginuser', (req, res)=>{
   const loginUser = req.body;
-   db.query("SELECT * FROM users WHERE email = ?",
+   db.query("SELECT * FROM travel_users WHERE email = ?",
   [loginUser.email],
   (err, user)=>{
     if(err){
@@ -112,7 +111,7 @@ app.post('/loginuser', (req, res)=>{
 
 
 app.post(`/getuser` ,(req, res)=>{
-  db.query("SELECT * FROM users WHERE email= ?", [req.body.email], 
+  db.query("SELECT * FROM travel_users WHERE email= ?", [req.body.email], 
 
  (err, user)=>{
     if(user.length>=1){
@@ -145,12 +144,11 @@ app.post(`/gethotels`, (req, res)=>{
 
 app.post(`/bookingdetails`,(req, res)=>{
   const booking_details = req.body;
-  console.log(booking_details);
-  db.query("INSERT INTO booking(booking_id,hotel_id,user_id,arrival_location,departure_location,arrival_date,departure_date) VALUES (?,?,?,?,?,?,?)",
-  [booking_details.booking_id, 
+  db.query("INSERT INTO bookings(hotel_id,user_id,arrical_location,departure_location,arrival_date,departure_date) VALUES (?,?,?,?,?,?)",
+  [
   booking_details.hotel_id, 
   booking_details.user_id, 
-  booking_details.arrival_location, 
+  booking_details.arrical_location, 
   booking_details.departure_location,
   booking_details.arrival_date,
   booking_details.departure_date],

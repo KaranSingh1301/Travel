@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "travel_users",
+  "info": {
+    "name": "travel_user"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "password": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "integer"
+    }
+  }
+}

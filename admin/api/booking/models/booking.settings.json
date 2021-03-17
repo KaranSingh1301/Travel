@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bookings",
+  "info": {
+    "name": "booking",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "hotel_id": {
+      "model": "hotel"
+    },
+    "user_id": {
+      "model": "travel-user"
+    },
+    "arrival_location": {
+      "type": "string"
+    },
+    "departure_location": {
+      "type": "string"
+    },
+    "arrival_date": {
+      "type": "date"
+    },
+    "departure_date": {
+      "type": "date"
+    }
+  }
+}
