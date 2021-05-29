@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const signUpUser = async (name, email, password, phone) => {
   return await axios
-    .post(`../../backend/register`, {
+    .post(`http://localhost:8000/register`, {
       name: name,
       email: email,
       password: password,
@@ -15,7 +15,7 @@ export const signUpUser = async (name, email, password, phone) => {
 
 export const loginUser = async (email, password) => {
   return await axios
-    .post(`../../backend/loginuser`, {
+    .post(`http://localhost:8000/loginuser`, {
       email: email,
       password: password,
     })
@@ -25,7 +25,7 @@ export const loginUser = async (email, password) => {
 
 export const validateUser = async (email) => {
   return await axios
-    .post(`../../backend/validate`, {
+    .post(`http://localhost:8000/validate`, {
       email: email,
     })
     .then((res) => res.data)
@@ -34,7 +34,7 @@ export const validateUser = async (email) => {
 
 export const getHotels = async (location) => {
   return await axios
-    .post(`../../backend/gethotels`, {
+    .post(`http://localhost:8000/gethotels`, {
       location: location,
     })
     .then((res) => res.data)
@@ -43,7 +43,7 @@ export const getHotels = async (location) => {
 
 export const getUser = async (email) => {
   return await axios
-    .post(`../../backend/getuser`, {
+    .post(`http://localhost:8000/getuser`, {
       email: email,
     })
     .then((res) => res.data)
@@ -53,7 +53,7 @@ export const getUser = async (email) => {
 
 export const postBooking = async (booking) => {
   return await axios
-    .post(`../../backend/bookingdetails`, {
+    .post(`http://localhost:8000/bookingdetails`, {
       hotel_id: booking.hotel_id,
       user_id: booking.user_id,
       arrival_location: booking.arrival_location,
@@ -68,7 +68,7 @@ export const postBooking = async (booking) => {
 
 export const getBookings = async (user_id) => {
   return await axios
-    .post(`../../backend/getBookings`, {
+    .post(`http://localhost:8000/getBookings`, {
       user_id: user_id,
     })
     .then((res) => res.data)
@@ -78,7 +78,7 @@ export const getBookings = async (user_id) => {
 
 export const deleteBooking = async (hotel_id,user_id) => {
   return await axios
-    .post(`../../backend/deleteBooking`, {
+    .post(`http://localhost:8000/deleteBooking`, {
       hotel_id:hotel_id,
       user_id:user_id
     })

@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "flights",
+  "info": {
+    "name": "flights"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "airline": {
+      "type": "string"
+    },
+    "destination": {
+      "type": "string"
+    },
+    "arrival": {
+      "type": "string"
+    },
+    "price": {
+      "type": "integer"
+    },
+    "timing": {
+      "type": "datetime"
+    }
+  }
+}

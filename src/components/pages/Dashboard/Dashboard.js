@@ -188,10 +188,10 @@ function Dashboard() {
       )}
       {results.length > 0 && (
         <Fragment>
-          {results.map((result) => (
+          {results.map((result, i) => (
             <SearchResult
               key={result.id}
-              img="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU"
+              img={`images/hotel`+i+`.jpg`}
               hotelID={result.id}
               location={result.location}
               title={result.name}

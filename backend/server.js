@@ -1,13 +1,11 @@
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 require("dotenv").config();
 const Bcrypt = require("bcrypt");
-const { findUserAndSendHelper } = require("./helper/userHelper");
 
 const BCRYPT_SALT_ROUNDS = 12;
-const BCRYPT_SMALL_SALT_ROUND = 1;
 
 //App Config
 const app = express();

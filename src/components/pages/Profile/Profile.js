@@ -47,10 +47,10 @@ function Profile() {
           <div className="profile__results">
             {bookingResults.length > 0 && (
               <Fragment>
-                {bookingResults.map((result) => (
+                {bookingResults.map((result, i) => (
                   <SearchResult
                     key={result.id}
-                    img="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU"
+                    img={`images/hotel`+i+`.jpg`}
                     hotelID={result.hotel_id}
                     location={result.arrival_location}
                     booking_id={result.id}

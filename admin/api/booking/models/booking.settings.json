@@ -28,6 +28,16 @@
     },
     "departure_date": {
       "type": "date"
+    },
+    "flight": {
+      "model": "flights"
+    },
+    "bus": {
+      "model": "bus"
+    },
+    "test": {
+      "type": "boolean",
+      "default": true
     }
   }
 }
